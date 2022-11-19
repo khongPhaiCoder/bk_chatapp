@@ -8,6 +8,10 @@ import './services/navigation_service.dart';
 
 // Pages
 import './pages/splash_page.dart';
+import './pages/login_page.dart';
+
+// Utils
+import './utils/contains.dart';
 
 void main() {
   runApp(SplashPage(
@@ -26,7 +30,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BKChatApp',
+      title: TITLE,
       theme: ThemeData(
         backgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
         scaffoldBackgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
@@ -34,7 +38,11 @@ class MainApp extends StatelessWidget {
           backgroundColor: Color.fromRGBO(30, 29, 37, 1.0),
         ),
       ),
-      // navigatorKey: NavigationService.navigatorKey,
+      navigatorKey: NavigationService.navigatorKey,
+      initialRoute: '/login',
+      routes: {
+        '/login': (BuildContext context) => LoginPage(),
+      },
     );
   }
 }
