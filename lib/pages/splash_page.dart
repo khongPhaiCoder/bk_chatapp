@@ -10,6 +10,9 @@ import '../services/media_service.dart';
 import '../services/clound_storage_service.dart';
 import '../services/database_service.dart';
 
+// Utils
+import '../utils/contains.dart';
+
 class SplashPage extends StatefulWidget {
   final VoidCallback onInitializationComplete;
 
@@ -38,7 +41,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BKChatApp',
+      title: TITLE,
       theme: ThemeData(
         backgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
         scaffoldBackgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
