@@ -11,4 +11,5 @@ const REG_EXP = {
 const ROUTES = {
   "HOME": "/home",
   "LOGIN": "/login",
+  "REGISTER": "/register",
 };
