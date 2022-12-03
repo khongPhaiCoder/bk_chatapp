@@ -1,6 +1,4 @@
 // Packages
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
@@ -26,8 +24,6 @@ class AuthenticationProvider extends ChangeNotifier {
     _auth = FirebaseAuth.instance;
     _navigationService = GetIt.instance.get<NavigationService>();
     _databaseService = GetIt.instance.get<DatabaseService>();
-
-    _auth.signOut();
 
     _auth.authStateChanges().listen((_user) {
       if (_user != null) {
@@ -65,7 +61,7 @@ class AuthenticationProvider extends ChangeNotifier {
       );
       print(_auth.currentUser);
     } on FirebaseAuthException {
-      print("Error logging user into Firebase");
+      print(ERROR_TEXTS["ERROR_LOGGING_INTO_FIREBASE"]);
     } catch (e) {
       print(e);
     }
@@ -83,7 +79,7 @@ class AuthenticationProvider extends ChangeNotifier {
 
       return _credentials.user!.uid;
     } on FirebaseAuthException {
-      print("Error registering user.");
+      print(ERROR_TEXTS["ERROR_REGISTERING_USER"]);
     } catch (e) {
       print(e);
     }

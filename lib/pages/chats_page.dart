@@ -1,5 +1,4 @@
 // Packages
-import 'package:bk_chatapp/models/chat.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get_it/get_it.dart';
@@ -22,6 +21,9 @@ import '../widgets/custom_list_view_tiles.dart';
 import '../models/chat.dart';
 import '../models/chat_user.dart';
 import '../models/chat_message.dart';
+
+// Utils
+import '../utils/contains.dart';
 
 class ChatsPage extends StatefulWidget {
   const ChatsPage({super.key});
@@ -72,14 +74,14 @@ class _ChatsPageState extends State<ChatsPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               TopBar(
-                "Chats",
+                LABELS["CHATS"]!,
                 primaryAction: IconButton(
                   onPressed: () {
                     _authenticationProvider.logout();
                   },
                   icon: Icon(
                     Icons.logout,
-                    color: Color.fromRGBO(0, 82, 218, 1.0),
+                    color: COLORS["PRIMARY_BLUE"],
                   ),
                 ),
               ),
@@ -96,7 +98,7 @@ class _ChatsPageState extends State<ChatsPage> {
     return Expanded(
       child: (() {
         if (_chats != null) {
-          if (_chats.length != 0) {
+          if (_chats.isNotEmpty) {
             return ListView.builder(
               itemCount: _chats.length,
               itemBuilder: (BuildContext _context, int _index) {
@@ -108,15 +110,15 @@ class _ChatsPageState extends State<ChatsPage> {
           } else {
             return Center(
               child: Text(
-                "No Chats Found.",
-                style: TextStyle(
+                HINT_TEXTS["NO_CHAT_FOUND"]!,
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),
             );
           }
         } else {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: Colors.white,
             ),
@@ -133,7 +135,7 @@ class _ChatsPageState extends State<ChatsPage> {
 
     if (_chat.messages.isNotEmpty) {
       _subtitleText = _chat.messages.first.type != MessageType.TEXT
-          ? "Media Attachment"
+          ? HINT_TEXTS["MEDIA_ATTACHMENT"]!
           : _chat.messages.first.content;
     }
 

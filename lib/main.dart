@@ -1,7 +1,7 @@
+// Packages
 import 'package:flutter/material.dart';
 
 // Packages
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:provider/provider.dart';
 
 // Services
@@ -46,10 +46,10 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         title: TITLE,
         theme: ThemeData(
-          backgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
-          scaffoldBackgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
+          backgroundColor: COLORS["DARK_BLUE_2"],
+          scaffoldBackgroundColor: COLORS["DARK_BLUE_2"],
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            backgroundColor: Color.fromRGBO(30, 29, 37, 1.0),
+            backgroundColor: COLORS["DARK_BLUE"],
           ),
         ),
         navigatorKey: NavigationService.navigatorKey,

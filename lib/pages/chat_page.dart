@@ -1,6 +1,4 @@
 // Packages
-import 'package:bk_chatapp/providers/authentication_provider.dart';
-import 'package:bk_chatapp/utils/contains.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +12,11 @@ import '../models/chat.dart';
 import '../models/chat_message.dart';
 
 // Providers
-import '../providers/chats_page_provider.dart';
 import '../providers/chat_page_provider.dart';
+import '../providers/authentication_provider.dart';
+
+// Utils
+import '../utils/contains.dart';
 
 class ChatPage extends StatefulWidget {
   final Chat chat;
@@ -55,7 +56,7 @@ class _ChatPageState extends State<ChatPage> {
       providers: [
         ChangeNotifierProvider<ChatPageProvider>(
           create: (_) => ChatPageProvider(
-            this.widget.chat.uid,
+            widget.chat.uid,
             _authenticationProvider,
             _messageListViewController,
           ),
@@ -83,7 +84,7 @@ class _ChatPageState extends State<ChatPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 TopBar(
-                  this.widget.chat.title(),
+                  widget.chat.title(),
                   fontSize: 12,
                   primaryAction: IconButton(
                     onPressed: () {
@@ -91,7 +92,7 @@ class _ChatPageState extends State<ChatPage> {
                     },
                     icon: Icon(
                       Icons.delete,
-                      color: Color.fromRGBO(0, 82, 218, 1.0),
+                      color: COLORS["PRIMARY_BLUE"],
                     ),
                   ),
                   secondaryAction: IconButton(
@@ -100,7 +101,7 @@ class _ChatPageState extends State<ChatPage> {
                     },
                     icon: Icon(
                       Icons.arrow_back,
-                      color: Color.fromRGBO(0, 82, 218, 1.0),
+                      color: COLORS["PRIMARY_BLUE"],
                     ),
                   ),
                 ),
@@ -132,10 +133,7 @@ class _ChatPageState extends State<ChatPage> {
                   deviceHeight: _deviceHeight,
                   isOwnMessage: _isOwnMessage,
                   message: _message,
-                  sender: this
-                      .widget
-                      .chat
-                      .members
+                  sender: widget.chat.members
                       .where((_m) => _m.uid == _message.senderID)
                       .first,
                 ),
@@ -147,15 +145,15 @@ class _ChatPageState extends State<ChatPage> {
         return Align(
           alignment: Alignment.center,
           child: Text(
-            "Be the first to say hi!",
-            style: TextStyle(
+            HINT_TEXTS["GREET_STR"]!,
+            style: const TextStyle(
               color: Colors.white,
             ),
           ),
         );
       }
     } else {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(
           color: Colors.white,
         ),
@@ -167,7 +165,7 @@ class _ChatPageState extends State<ChatPage> {
     return Container(
       height: _deviceHeight * 0.06,
       decoration: BoxDecoration(
-        color: Color.fromRGBO(30, 29, 37, 1.0),
+        color: COLORS["DARK_BLUE"],
         borderRadius: BorderRadius.circular(100),
       ),
       margin: EdgeInsets.symmetric(
@@ -198,7 +196,7 @@ class _ChatPageState extends State<ChatPage> {
           _chatPageProvider.message = _value;
         },
         regEx: REG_EXP["TEXT_FIELD"]!,
-        hintText: "Typing a message",
+        hintText: HINT_TEXTS["HINT_TEXT"]!,
         obscureText: false,
       ),
     );
@@ -218,7 +216,7 @@ class _ChatPageState extends State<ChatPage> {
             _messageFormState.currentState!.reset();
           }
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.send,
           color: Colors.white,
         ),
@@ -233,11 +231,11 @@ class _ChatPageState extends State<ChatPage> {
       height: _size,
       width: _size,
       child: FloatingActionButton(
-        backgroundColor: Color.fromRGBO(0, 82, 218, 1.0),
+        backgroundColor: COLORS["PRIMARY_BLUE"],
         onPressed: () {
           _chatPageProvider.sendImageMessage();
         },
-        child: Icon(Icons.camera_enhance),
+        child: const Icon(Icons.camera_enhance),
       ),
     );
   }

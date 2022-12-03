@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 // Packages
+import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 
@@ -29,7 +28,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 1)).then(
+    Future.delayed(const Duration(seconds: 1)).then(
       (_) => {
         _setup().then(
           (_) => widget.onInitializationComplete(),
@@ -43,15 +42,15 @@ class _SplashPageState extends State<SplashPage> {
     return MaterialApp(
       title: TITLE,
       theme: ThemeData(
-        backgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
-        scaffoldBackgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
+        backgroundColor: COLORS["DARK_BLUE_2"],
+        scaffoldBackgroundColor: COLORS["DARK_BLUE_2"],
       ),
       home: Scaffold(
         body: Center(
           child: Container(
             height: 200,
             width: 200,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.contain,
                 image: AssetImage('assets/images/logo.png'),

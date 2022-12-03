@@ -2,6 +2,9 @@
 import './chat_user.dart';
 import './chat_message.dart';
 
+// Utils
+import '../utils/contains.dart';
+
 class Chat {
   final String uid;
   final String currentUserUid;
@@ -34,8 +37,6 @@ class Chat {
   }
 
   String imageURL() {
-    return !group
-        ? _recipients.first.imageURL
-        : "https://e7.pngegg.com/pngimages/380/670/png-clipart-group-chat-logo-blue-area-text-symbol-metroui-apps-live-messenger-alt-2-blue-text.png";
+    return !group ? _recipients.first.imageURL : DEFAULT_AVATAR["GROUP"]!;
   }
 }

@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import './chats_page.dart';
 import './users_page.dart';
 
+// Utils
+import '../utils/contains.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -36,12 +39,12 @@ class _HomePageState extends State<HomePage> {
         },
         items: [
           BottomNavigationBarItem(
-            label: "Chats",
-            icon: Icon(Icons.chat_bubble_sharp),
+            label: LABELS["CHATS"],
+            icon: const Icon(Icons.chat_bubble_sharp),
           ),
           BottomNavigationBarItem(
-            label: "Users",
-            icon: Icon(Icons.supervised_user_circle_sharp),
+            label: LABELS["USERS"],
+            icon: const Icon(Icons.supervised_user_circle_sharp),
           ),
         ],
       ),

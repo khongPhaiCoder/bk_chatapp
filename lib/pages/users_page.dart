@@ -1,7 +1,6 @@
 // Packages
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:get_it/get_it.dart';
 
 // Providers
 import '../providers/authentication_provider.dart';
@@ -15,6 +14,9 @@ import '../widgets/rounded_button.dart';
 
 // Models
 import '../models/chat_user.dart';
+
+// Utils
+import '../utils/contains.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({super.key});
@@ -67,14 +69,14 @@ class _UsersPageState extends State<UsersPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               TopBar(
-                "Users",
+                LABELS["USERS"]!,
                 primaryAction: IconButton(
                   onPressed: () {
                     _authenticationProvider.logout();
                   },
                   icon: Icon(
                     Icons.logout,
-                    color: Color.fromRGBO(0, 82, 218, 1.0),
+                    color: COLORS["PRIMARY_BLUE"]!,
                   ),
                 ),
               ),
@@ -101,7 +103,7 @@ class _UsersPageState extends State<UsersPage> {
     List<ChatUser>? _users = _pageProvider.users;
     return Expanded(child: () {
       if (_users != null) {
-        if (_users.length != 0) {
+        if (_users.isNotEmpty) {
           return ListView.builder(
             itemCount: _users.length,
             itemBuilder: (BuildContext _context, int _index) {
@@ -122,13 +124,15 @@ class _UsersPageState extends State<UsersPage> {
         } else {
           return Center(
             child: Text(
-              "No Users Found.",
-              style: TextStyle(color: Colors.white),
+              HINT_TEXTS["NO_USERS_FOUND"]!,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
             ),
           );
         }
       } else {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(
             color: Colors.white,
           ),
@@ -142,8 +146,8 @@ class _UsersPageState extends State<UsersPage> {
       visible: _pageProvider.selectedUsers.isNotEmpty,
       child: RoundedButton(
         name: _pageProvider.selectedUsers.length == 1
-            ? "Chat with ${_pageProvider.selectedUsers.first.name}"
-            : "Create Group Chat",
+            ? "${HINT_TEXTS["CHAT_WITH"]} ${_pageProvider.selectedUsers.first.name}"
+            : HINT_TEXTS["CREATE_GROUP_CHAT"]!,
         height: _deviceHeight * 0.08,
         width: _deviceWidth * 0.80,
         onPressed: () {

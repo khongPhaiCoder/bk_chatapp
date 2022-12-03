@@ -1,3 +1,4 @@
+// Packages
 import 'package:flutter/material.dart';
 
 // Packages
@@ -5,6 +6,9 @@ import 'package:timeago/timeago.dart' as timeago;
 
 // Models
 import '../models/chat_message.dart';
+
+// Utils
+import '../utils/contains.dart';
 
 class TextMessageBubbles extends StatelessWidget {
   final bool isOwnMessage;
@@ -23,25 +27,25 @@ class TextMessageBubbles extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Color> _colorScheme = isOwnMessage
         ? [
-            Color.fromRGBO(0, 136, 249, 1.0),
-            Color.fromRGBO(0, 82, 218, 1.0),
+            COLORS["LIGHT_BLUE"]!,
+            COLORS["PRIMARY_BLUE"]!,
           ]
         : [
-            Color.fromRGBO(51, 49, 68, 1.0),
-            Color.fromRGBO(51, 49, 68, 1.0),
+            COLORS["DARK_BLUE_3"]!,
+            COLORS["DARK_BLUE_3"]!,
           ];
 
     return Container(
       height: height + (message.content.length / 20 * 6.0),
       width: width,
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         gradient: LinearGradient(
           colors: _colorScheme,
-          stops: [0.30, 0.70],
+          stops: const [0.30, 0.70],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
@@ -53,13 +57,13 @@ class TextMessageBubbles extends StatelessWidget {
         children: [
           Text(
             message.content,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
             ),
           ),
           Text(
             timeago.format(message.sentTime),
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white70,
             ),
           ),
@@ -86,12 +90,12 @@ class ImageMessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Color> _colorScheme = isOwnMessage
         ? [
-            Color.fromRGBO(0, 136, 249, 1.0),
-            Color.fromRGBO(0, 82, 218, 1.0),
+            COLORS["LIGHT_BLUE"]!,
+            COLORS["PRIMARY_BLUE"]!,
           ]
         : [
-            Color.fromRGBO(51, 49, 68, 1.0),
-            Color.fromRGBO(51, 49, 68, 1.0),
+            COLORS["DARK_BLUE_3"]!,
+            COLORS["DARK_BLUE_3"]!,
           ];
 
     DecorationImage _image = DecorationImage(
@@ -108,7 +112,7 @@ class ImageMessageBubble extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         gradient: LinearGradient(
           colors: _colorScheme,
-          stops: [0.30, 0.70],
+          stops: const [0.30, 0.70],
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
         ),
@@ -131,7 +135,7 @@ class ImageMessageBubble extends StatelessWidget {
           ),
           Text(
             timeago.format(message.sentTime),
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white70,
             ),
           ),

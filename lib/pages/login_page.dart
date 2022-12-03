@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _pageTitle() {
     return Container(
       height: _deviceHeight * 0.10,
-      child: Text(
+      child: const Text(
         TITLE,
         style: TextStyle(
           color: Colors.white,
@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                 });
               },
               regEx: REG_EXP["EMAIL"]!,
-              hintText: "Email",
+              hintText: HINT_TEXTS["EMAIL"]!,
               obscureText: false,
             ),
             CustomTextFormField(
@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                 });
               },
               regEx: REG_EXP["PASSWORD"]!,
-              hintText: "Password",
+              hintText: HINT_TEXTS["PASSWORD"]!,
               obscureText: true,
             ),
           ],
@@ -150,8 +150,8 @@ class _LoginPageState extends State<LoginPage> {
       onTap: () => _navigationService.navigateToRoute(ROUTES["REGISTER"]!),
       child: Container(
         child: Text(
-          'Don\'t have an account?',
-          style: TextStyle(
+          HINT_TEXTS["DONT_HAVE_ACCOUNT"]!,
+          style: const TextStyle(
             color: Colors.blueAccent,
           ),
         ),

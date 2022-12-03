@@ -112,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
         } else {
           return RoundedImageNetwork(
             key: UniqueKey(),
-            imagePath: "https://i.pravatar.cc/1000?img=65",
+            imagePath: DEFAULT_AVATAR["USER"]!,
             size: _deviceHeight * 0.15,
           );
         }
@@ -137,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
               },
               regEx: REG_EXP["PASSWORD"]!,
-              hintText: "Name",
+              hintText: HINT_TEXTS["NAME"]!,
               obscureText: false,
             ),
             CustomTextFormField(
@@ -147,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
               },
               regEx: REG_EXP["EMAIL"]!,
-              hintText: "Email",
+              hintText: HINT_TEXTS["EMAIL"]!,
               obscureText: false,
             ),
             CustomTextFormField(
@@ -157,7 +157,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
               },
               regEx: REG_EXP["PASSWORD"]!,
-              hintText: "Password",
+              hintText: HINT_TEXTS["PASSWORD"]!,
               obscureText: true,
             ),
           ],

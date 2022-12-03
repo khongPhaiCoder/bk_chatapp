@@ -1,3 +1,4 @@
+// Packages
 import 'package:flutter/material.dart';
 
 // Utils
@@ -21,22 +22,22 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       onSaved: (_value) => onSaved(_value!),
       cursorColor: Colors.white,
-      style: TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white),
       obscureText: obscureText,
       validator: (_value) {
         return RegExp(regEx).hasMatch(_value!)
             ? null
-            : INPUT_FIELD_ERROR_MESSAGE;
+            : ERROR_TEXTS["INPUT_FIELD_ERROR_MESSAGE"];
       },
       decoration: InputDecoration(
-          fillColor: Color.fromRGBO(30, 29, 37, 1.0),
+          fillColor: COLORS["DARK_BLUE"],
           filled: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide.none,
           ),
           hintText: hintText,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: Colors.white54,
           )),
     );
@@ -64,19 +65,19 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       onEditingComplete: () => onEditingComplete(controller.value.text),
       cursorColor: Colors.white,
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.white,
       ),
       obscureText: obscureText,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(30, 29, 37, 1.0),
+        fillColor: COLORS["DARK_BLUE"],
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
           borderSide: BorderSide.none,
         ),
         hintText: hintText,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: Colors.white54,
         ),
         prefixIcon: Icon(
