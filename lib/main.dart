@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'firebase_options.dart';
 
 // Packages
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -19,7 +21,11 @@ import './pages/register_page.dart';
 // Utils
 import './utils/contains.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(SplashPage(
     key: UniqueKey(),
     onInitializationComplete: () {
