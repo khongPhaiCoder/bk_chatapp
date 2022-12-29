@@ -46,11 +46,14 @@ class UserPageProvider extends ChangeNotifier {
     _selectedUsers = [];
     try {
       _databaseService.getUsers(name: name).then((_snapshot) {
-        users = _snapshot.docs.map((_doc) {
+        var _users = _snapshot.docs.map((_doc) {
           Map<String, dynamic> _data = _doc.data() as Map<String, dynamic>;
           _data["uid"] = _doc.id;
           return ChatUser.fromJSON(_data);
         }).toList();
+        users = _users
+            .where((user) => user.uid != _authenticationProvider.user.uid)
+            .toList();
         notifyListeners();
       });
     } catch (e) {

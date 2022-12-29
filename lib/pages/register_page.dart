@@ -112,7 +112,8 @@ class _RegisterPageState extends State<RegisterPage> {
         } else {
           return RoundedImageNetwork(
             key: UniqueKey(),
-            imagePath: "https://i.pravatar.cc/1000?img=65",
+            imagePath:
+                "https://static.vecteezy.com/system/resources/thumbnails/005/176/777/small/user-avatar-line-style-free-vector.jpg",
             size: _deviceHeight * 0.15,
           );
         }
@@ -172,14 +173,20 @@ class _RegisterPageState extends State<RegisterPage> {
       height: _deviceHeight * 0.065,
       width: _deviceWidth * 0.65,
       onPressed: () async {
-        if (_registerFormKey.currentState!.validate() &&
-            _profileImage != null) {
+        if (_registerFormKey.currentState!.validate()) {
           _registerFormKey.currentState!.save();
           String? _uid = await _authenticationProvider
               .registerUserUsingEmailAndPassword(_email!, _password!);
-          String? _imageURL = await _cloudStorageService.saveUserImageToStorage(
-              _uid!, _profileImage!);
-          await _databaseService.createUser(_uid, _email!, _name!, _imageURL!);
+          String? _imageURL;
+          if (_profileImage != null) {
+            String? _imageURL = await _cloudStorageService
+                .saveUserImageToStorage(_uid!, _profileImage!);
+          } else {
+            _imageURL =
+                "https://static.vecteezy.com/system/resources/thumbnails/005/176/777/small/user-avatar-line-style-free-vector.jpg";
+          }
+          print({_uid, _email, _name, _password, _imageURL});
+          await _databaseService.createUser(_uid!, _email!, _name!, _imageURL!);
           await _authenticationProvider.logout();
           _navigationService.goBack();
         }
